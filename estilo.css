@@ -1,27 +1,67 @@
-/* Reset */
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
   }
-
+  
+  /*1. Zerar margens/padding e definir altura total*/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /*Setup para o “sticky footer”*/
+  }
+  
+  /*2. Transformando o body em flex container em coluna*/
   body {
+    display: flex;
+    flex-direction: column;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #e2f6f7;
     color: #333;
   }
-
+  
+  /*3. O main cresce para ocupar o espaço livre*/
+  main {
+    flex: 1 0 auto; /*Main se ajusta e empurra o rodapé para o fim da página*/
+    max-width: 960px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  /*4. O rodapé não cresce, ficando fixo ao fim se a tela for maior que o conteúdo*/
+  footer {
+    flex-shrink: 0;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #010054;
+    color: #fff;
+  }
+  
+  /*Cabeçalho e Navegação*/
   header {
-    background-color: #333;
+    background-color: #010054;
     color: #fff;
     padding: 10px 0;
   }
-  
+
+  span{
+    font-size: 14px;
+  }
+
+  h2{
+    font-size: 18px;
+  }
+
   nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
   }
   
   nav ul li {
@@ -37,16 +77,8 @@
   nav ul li a:hover {
     text-decoration: underline;
   }
-
-  main {
-    max-width: 960px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
   
+  /*Conteúdos de seção*/
   section {
     margin-bottom: 20px;
   }
@@ -55,7 +87,8 @@
     font-style: italic;
     margin-bottom: 15px;
   }
-
+  
+  /*Form de Contato*/
   form {
     display: flex;
     flex-direction: column;
@@ -69,8 +102,9 @@
   form input,
   form textarea {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     border-radius: 3px;
+    resize: none;
   }
   
   form button {
@@ -78,32 +112,50 @@
     padding: 10px;
     border: none;
     border-radius: 3px;
-    background-color: #333;
+    background-color: #010054;
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
   }
   
   form button:hover {
-    background-color: #555;
+    background-color: #002354;
+  }
+  
+  .foto-perfil {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  /*Imagem em formato circular*/
+  .foto-perfil img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #010054;
   }
 
-  footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #333;
-    color: #fff;
-    margin-top: 20px;
-  }
-  
-  /* Responsividade */
+  /*Ajustes para Mobile*/
   @media (max-width: 600px) {
+    /*1. Manter itens do menu lado a lado no mobile (estavam ficando em cascata)*/
     nav ul {
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
     }
-    
     nav ul li {
-      margin: 10px 0;
+      margin: 0 10px;
+    }
+    /*2. Ajustar dimensões gerais no mobile*/
+    main {
+        max-width: none;
+        width: auto;
+        margin: 10px;
+        padding: 15px;
+    }
+    body {
+      font-size: 0.9rem;
     }
   }
-  
